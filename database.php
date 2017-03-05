@@ -43,7 +43,7 @@ define('DATABASE', 'php_tp1'); // Database Database name
 function DB()
 {
     try {
-        $db = new PDO('mysql:host='.HOST.';dbname='.DATABASE.'', USER, PASSWORD);
+        $db = new PDO('mysql:host=localhost:8889;dbname=php_tp1','root','root');
         return $db;
     } catch (PDOException $e) {
         return "Error!: " . $e->getMessage();

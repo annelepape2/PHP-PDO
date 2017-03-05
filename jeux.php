@@ -19,7 +19,7 @@ if (isset($_SESSION['perso'])){
 	$perso = $_SESSION['perso'];
 }
 
-$db = new PDO('mysql:host=localhost;dbname=php_tp1','root','');
+$db = new PDO('mysql:host=localhost:8889;dbname=php_tp1','root','root');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 
 $manager = new PersonnagesManager($db);

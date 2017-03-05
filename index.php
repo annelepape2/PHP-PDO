@@ -1,9 +1,4 @@
 <?php
-/*
- * Tutorial: PHP Login Registration system
- *
- * Page index.php
- * */
 
 // Start Session
 session_start();
