@@ -1,10 +1,12 @@
 <?php
-<?php
+
 /*
   Usage :
    $pdo = Database::getInstance();
 
 */
+
+
 class Database
 {
     static private $_instance = null;
