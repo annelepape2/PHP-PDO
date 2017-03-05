@@ -41,7 +41,7 @@ $user = $app->UserDetails($_SESSION['user_id']); // get user details
             </h2>
             <h3>Hello <?php echo $user->name ?>,</h3>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur deserunt dolore fuga labore magni maxime, quaerat reiciendis tenetur? Accusantium blanditiis doloribus earum error inventore laudantium nesciunt quis reprehenderit ullam vel?
+                <a href="jeux.php" class="btn btn-info">Débuter la partie</a>
             </p>
             <a href="logout.php" class="btn btn-primary">Logout</a>
         </div>

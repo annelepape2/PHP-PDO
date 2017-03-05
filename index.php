@@ -71,7 +71,7 @@ if (!empty($_POST['btnRegister'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>TP - PDO</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
@@ -81,16 +81,16 @@ if (!empty($_POST['btnRegister'])) {
     <div class="row">
         <div class="col-md-12">
             <h2>
-                PHP Login Registration System with PDO Connection using SHA-256 Cryptographic Hash Algorithm to store Password
+                TP - PDO
             </h2>
         </div>
     </div>
     <div class="form-group">
-        Note: This is demo version from iTech Empires tutorials.
+        Venez jouer !
     </div>
     <div class="row">
         <div class="col-md-5 well">
-            <h4>Register</h4>
+            <h4>Inscription</h4>
             <?php
             if ($register_error_message != "") {
                 echo '<div class="alert alert-danger"><strong>Error: </strong> ' . $register_error_message . '</div>';
@@ -98,7 +98,7 @@ if (!empty($_POST['btnRegister'])) {
             ?>
             <form action="index.php" method="post">
                 <div class="form-group">
-                    <label for="">Name</label>
+                    <label for="">Nom</label>
                     <input type="text" name="name" class="form-control"/>
                 </div>
                 <div class="form-group">
@@ -106,21 +106,21 @@ if (!empty($_POST['btnRegister'])) {
                     <input type="email" name="email" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <label for="">Username</label>
+                    <label for="">Pseudo</label>
                     <input type="text" name="username" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <label for="">Password</label>
+                    <label for="">Mot de passe</label>
                     <input type="password" name="password" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <input type="submit" name="btnRegister" class="btn btn-primary" value="Register"/>
+                    <input type="submit" name="btnRegister" class="btn btn-primary" value="Inscription"/>
                 </div>
             </form>
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-5 well">
-            <h4>Login</h4>
+            <h4>Connexion</h4>
             <?php
             if ($login_error_message != "") {
                 echo '<div class="alert alert-danger"><strong>Error: </strong> ' . $login_error_message . '</div>';
@@ -128,15 +128,15 @@ if (!empty($_POST['btnRegister'])) {
             ?>
             <form action="index.php" method="post">
                 <div class="form-group">
-                    <label for="">Username/Email</label>
+                    <label for="">Pseudo/Email</label>
                     <input type="text" name="username" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <label for="">Password</label>
+                    <label for="">Mot de passe</label>
                     <input type="password" name="password" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <input type="submit" name="btnLogin" class="btn btn-primary" value="Login"/>
+                    <input type="submit" name="btnLogin" class="btn btn-primary" value="Connexion"/>
                 </div>
             </form>
         </div>
