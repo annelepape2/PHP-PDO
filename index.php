@@ -69,8 +69,10 @@ if (!empty($_POST['btnRegister'])) {
     <title>TP - PDO</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet"> 
 </head>
-<body>
+<body class="body">
 
 <div class="container">
     <div class="row">
@@ -80,12 +82,10 @@ if (!empty($_POST['btnRegister'])) {
             </h2>
         </div>
     </div>
-    <div class="form-group">
-        Venez jouer !
-    </div>
+
     <div class="row">
         <div class="col-md-5 well">
-            <h4>Inscription</h4>
+            <h4 id="h4"><strong>Inscription</strong></h4>
             <?php
             if ($register_error_message != "") {
                 echo '<div class="alert alert-danger"><strong>Error: </strong> ' . $register_error_message . '</div>';
@@ -93,29 +93,29 @@ if (!empty($_POST['btnRegister'])) {
             ?>
             <form action="index.php" method="post">
                 <div class="form-group">
-                    <label for="">Nom</label>
+                    <label for="" id="formulaire">Nom</label>
                     <input type="text" name="name" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <label for="">Email</label>
+                    <label for="" id="formulaire">Email</label>
                     <input type="email" name="email" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <label for="">Pseudo</label>
+                    <label for="" id="formulaire">Pseudo</label>
                     <input type="text" name="username" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <label for="">Mot de passe</label>
+                    <label for="" id="formulaire">Mot de passe</label>
                     <input type="password" name="password" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <input type="submit" name="btnRegister" class="btn btn-primary" value="Inscription"/>
+                    <input type="submit" name="btnRegister" class="btn btn-primary" value="Envoyer"/>
                 </div>
             </form>
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-5 well">
-            <h4>Connexion</h4>
+            <h4 id="h4"><strong>Connexion</strong></h4>
             <?php
             if ($login_error_message != "") {
                 echo '<div class="alert alert-danger"><strong>Error: </strong> ' . $login_error_message . '</div>';
@@ -123,15 +123,15 @@ if (!empty($_POST['btnRegister'])) {
             ?>
             <form action="index.php" method="post">
                 <div class="form-group">
-                    <label for="">Pseudo/Email</label>
+                    <label for="" id="formulaire">Pseudo/Email</label>
                     <input type="text" name="username" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <label for="">Mot de passe</label>
+                    <label for="" id="formulaire">Mot de passe</label>
                     <input type="password" name="password" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <input type="submit" name="btnLogin" class="btn btn-primary" value="Connexion"/>
+                    <input type="submit" name="btnLogin" class="btn btn-primary" value="Envoyer"/>
                 </div>
             </form>
         </div>

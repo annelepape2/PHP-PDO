@@ -94,6 +94,8 @@ if (isset($_POST['creer']) && isset($_POST['nom'])){
 	<head>
 		<title>TP : Mini jeu de combat</title>
 		<meta charset="utf-8" />
+		<link rel="stylesheet" href="css/style.css">
+		<link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet">
 	</head>
 	<body>
 	
@@ -144,11 +146,13 @@ if (isset($_POST['creer']) && isset($_POST['nom'])){
 			
 	?>
 			<form action="" method = "post">
+				<div class="form-group">
 				<p>
 					Nom : <input type="text" name="nom" maxlength="50" />
-					<input type="submit" value = "Créer ce personnage" name="creer" />
-					<input type="submit" value = "Utiliser ce personnage" name="utiliser" />
+					<input type="submit" value = "Créer ce personnage" name="creer" class="form-control" />
+					<input type="submit" value = "Utiliser ce personnage" name="utiliser" class="form-control" />
 				</p>
+				</div>
 			</form>
 	<?php
 		}
