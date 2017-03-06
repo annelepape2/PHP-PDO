@@ -1,0 +1,54 @@
+.body{
+    background-image: url("../img/dun.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+.col-md-12{
+    color: #ffffff;
+    text-align: center;
+}
+
+#slogan{
+    text-align: center;
+    color: #ffffff;
+}
+
+#formulaire{
+    font-family: 'Tangerine', cursive;
+    font-size: 25px;
+}
+
+#h4{
+    text-align: right;
+    font-family: 'Tangerine', cursive;
+    font-size: 35px;
+}
+
+#profil{
+    background-image: url("../img/dun2.jpg");
+}
+
+#h2{
+    font-family: 'Tangerine', cursive;
+    font-size: 35px;
+    color: #ffffff;
+}
+
+#h3{
+    font-family: 'Tangerine', cursive;
+    font-size: 35px;
+    color: #ffffff;
+}
+
+#h1{
+    font-family: 'Tangerine', cursive;
+    font-size: 35px;
+    color: #000000;
+}
+
+#h6{
+    font-family: 'Tangerine', cursive;
+    font-size: 25px;
+    color: #000000;
+}
