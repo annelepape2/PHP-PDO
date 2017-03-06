@@ -1,186 +1,186 @@
 <?php
-class Personnage
+abstract class Personnage
 {
-	private $_id;
-	private $_nom;
-	private $_pv;
-	private $_experience;
-	private $_niveau;
-	private $_nbCoups;
-	private $_dateDernierCoup;
-	
-	const CEST_MOI = 1;
-	const PERSONNAGE_TUE = 2;
-	const PERSONNAGE_FRAPPE = 3;
-	const PAS_AUJOURDHUI = 4;
-	
-	public function __construct(array $donnees)
-	{
-		$this->hydrate($donnees);
-	}
-	
-
-	public function frapper(Personnage $perso,Personnage $persos  )
-	{
-		if ($this->id() == $perso->id()){
-			return self::CEST_MOI;
-		}
-		
-	
-		
-	
-		
-			if ($this->setNbCoups($this->nbCoups() + 1)){
-			
-		} else {
-			$this->setNbCoups(1);
-		}
-	
-		
-		return $perso->recevoirpv($this->niveau() - 5);
-		return $persos->recevoirpv($this->niveau() - 5);
-		
-		if ($this->id() == $persos->id()){
-			return self::CEST_MOI;
-		}
-		
-	
-		
-		if ($this->setNbCoups($this->nbCoups() + 1)){
-			
-		} else {
-			$this->setNbCoups(1);
-		}
-		
-		
-	
-		
-		return $persos->recevoirpv($this->niveau() - 5);
-	}
-
-	public function recevoirpv($force)
-	{
-		$this->setpv($this->pv() + $force);		
-		if ($this->pv() <= 0){
-			return self::PERSONNAGE_TUE;
-		}
-		return self::PERSONNAGE_FRAPPE;
-	}
-
-	
-	public function gagnerExperience(){
-		$this->setExperience($this->experience() + $this->niveau() * 2);
-		
-		if ($this->experience() >= 100){
-			$this->setNiveau($this->niveau() + 1);
-			$this->setExperience(0);
-		}
-	}
-
-	
-	public function hydrate(array $donnees)
-	{
-		foreach ($donnees as $key => $value)
-		{
-			$method = 'set'.ucfirst($key);
-			if (method_exists($this, $method))
-			{
-				$this->$method($value);
-			}
-		}
-	}
-	
-	public function id()
-	{
-		return $this->_id;
-	}
-	
-	public function nom()
-	{
-		return $this->_nom;
-	}
-	
-	public function pv()
-	{
-		return $this->_pv;
-	}
-	
-	public function experience(){
-		return $this->_experience;
-	}
-	
-	public function niveau()
-	{
-		return $this->_niveau;
-	}
-	
-	public function nbCoups()
-	{
-		return $this->_nbCoups;
-	}
-	
-	public function dateDernierCoup()
-	{
-		return $this->_dateDernierCoup;
-	}
-	
-	public function setId($id)
-	{
-		$id = (int) $id;
-		if ($id >= 0) {
-			$this->_id = $id;
-		}
-	}
-	
-	public function setNom($nom)
-	{
-		if (is_string($nom)) {
-			$this->_nom = $nom;
-		}
-	}
-	
-	public function setpv($pv)
-	{
-		$pv = (int) $pv;
-		//if ($pv >= 0 && $pv <= 100) {
-			$this->_pv = $pv;
-		//}
-	}
-	
-	public function setExperience($experience)
-	{
-		$experience = (int) $experience;
-		//if ($experience >= 0 && $experience <= 100) {
-			$this->_experience = $experience;
-		//}
-	}
-	
-	public function setNiveau($niveau)
-	{
-		$niveau = (int) $niveau;
-		if ($niveau >= 0 && $niveau <= 100) {
-			$this->_niveau = $niveau;
-		}
-	}
-	
-	public function setNbCoups($nbCoups)
-	{
-		$nbCoups = (int) $nbCoups;
-		if ($nbCoups >= 0 && $nbCoups <= 100) {
-			$this->_nbCoups = $nbCoups;
-		}
-	}
-	
-	public function setDateDernierCoup($dateDernierCoup)
-	{
-		$dateDernierCoup = DateTime::createFromFormat("Y-m-d", $dateDernierCoup);
-		$this->_dateDernierCoup = $dateDernierCoup;
-	}
-	
-	public function nomValide()
-	{
-		return !(empty($this->_nom));
-	}
+  protected $atout,
+            $pv,
+            $id,
+            $nom,
+            $argent,
+            $timeEndormi,
+            $type;
+  
+  const CEST_MOI = 1; 
+  const PERSONNAGE_TUE = 2; 
+  const PERSONNAGE_FRAPPE = 3; 
+  const PERSONNAGE_ENSORCELE = 4; 
+  const PAS_DE_MAGIE = 5; 
+  const PERSO_ENDORMI = 6; 
+  
+  public function __construct(array $donnees)
+  {
+    $this->hydrate($donnees);
+    $this->type = strtolower(get_class($this));
+  }
+  
+  public function estEndormi()
+  {
+    return $this->timeEndormi > time();
+  }
+  
+  public function frapper(Personnage $perso)
+  {
+    if ($perso->id == $this->id)
+    {
+      return self::PERSONNAGE_FRAPPE;
+    }
+    
+    if ($this->estEndormi())
+    {
+      return self::PERSO_ENDORMI;
+    }
+    
+    
+    return $perso->perdrepv($this->pv() - 5);
+     return $this->perdrepv($this->pv() - 5);
+  }
+  
+  public function hydrate(array $donnees)
+  {
+    foreach ($donnees as $key => $value)
+    {
+      $method = 'set'.ucfirst($key);
+      
+      if (method_exists($this, $method))
+      {
+        $this->$method($value);
+      }
+    }
+  }
+   public function ennemiefrappe(){
+    $this->pv -= 5;
+  }
+    public function gagnerargent(){
+    $this->argent += 1;
+      $this->pv -= 5;
+  }
+ 
+  
+  public function nomValide()
+  {
+    return !empty($this->nom);
+  }
+  
+  public function perdrepv($force)
+  {
+    $this->pv -= 5;
+    
+    // Si on a 100 de dégâts ou plus, on supprime le personnage de la BDD.
+    if ($this->pv <= 0)
+    {
+      return self::PERSONNAGE_TUE;
+    }
+    
+    // Sinon, on se contente de mettre à jour les dégâts du personnage.
+    return self::PERSONNAGE_FRAPPE;
+  }
+  
+  public function reveil()
+  {
+    $secondes = $this->timeEndormi;
+    $secondes -= time();
+    
+    $heures = floor($secondes / 3600);
+    $secondes -= $heures * 3600;
+    $minutes = floor($secondes / 60);
+    $secondes -= $minutes * 60;
+    
+    $heures .= $heures <= 1 ? ' heure' : ' heures';
+    $minutes .= $minutes <= 1 ? ' minute' : ' minutes';
+    $secondes .= $secondes <= 1 ? ' seconde' : ' secondes';
+    
+    return $heures . ', ' . $minutes . ' et ' . $secondes;
+  }
+  
+  public function atout()
+  {
+    return $this->atout;
+  }
+  
+  public function pv()
+  {
+    return $this->pv;
+  }
+  
+  public function id()
+  {
+    return $this->id;
+  }
+  
+  public function nom()
+  {
+    return $this->nom;
+  }
+   public function argent(){
+    return $this->argent;
+  }
+  
+  public function timeEndormi()
+  {
+    return $this->timeEndormi;
+  }
+  
+  public function type()
+  {
+    return $this->type;
+  }
+  
+  public function setAtout($atout)
+  {
+    $atout = (int) $atout;
+    
+    if ($atout >= 0 && $atout <= 100)
+    {
+      $this->atout = $atout;
+    }
+  }
+  
+  public function setpv($pv)
+  {
+    $pv = (int) $pv;
+    
+    if ($pv >= 0 && $pv <= 100)
+    {
+      $this->pv = $pv;
+    }
+  }
+  
+  public function setId($id)
+  {
+    $id = (int) $id;
+    
+    if ($id > 0)
+    {
+      $this->id = $id;
+    }
+  }
+  
+  public function setNom($nom)
+  {
+    if (is_string($nom))
+    {
+      $this->nom = $nom;
+    }
+  }
+  public function setargent($argent)
+  {
+    $argent = (int) $argent;
+    if ($argent >= 0 && $argent <= 100) {
+      $this->argent = $argent;
+    }
+  }
+  
+  public function setTimeEndormi($time)
+  {
+    $this->timeEndormi = (int) $time;
+  }
 }
-
-
