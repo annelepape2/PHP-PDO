@@ -1,4 +1,6 @@
 <?php
+
+@ini_set('display_errors', 'on'); 
 function chargerClasse($classe)
 {
   require $classe . '.php';
@@ -15,7 +17,7 @@ if (isset($_GET['deconnexion']))
   exit();
 }
 
-$db = new PDO('mysql:host=localhost;dbname=php_tp1', 'root', '');
+$db = new PDO('mysql:host=localhost:3306;dbname=php_tp1', 'root', 'root');
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 
 $manager = new PersonnagesManager($db);
@@ -90,7 +92,7 @@ elseif (isset($_GET['frapper'])) // Si on a cliqué sur un personnage pour le fr
     else
     {
       $persoAFrapper = $manager->get((int) $_GET['frapper']);
-      $retour = $perso->frapper($persoAFrapper); // On stocke dans $retour les éventuelles erreurs ou messages que renvoie la méthode frapper.
+      $retour = $perso->frapper($persoAFrapper); 
       
       switch ($retour)
       {
@@ -135,7 +137,7 @@ elseif (isset($_GET['ensorceler']))
   
   else
   {
-    // Il faut bien vérifier que le personnage est un magicien.
+    
     if ($perso->type() != 'magicien')
     {
       $message = 'Seuls les magiciens peuvent ensorceler des personnages !';
@@ -180,38 +182,49 @@ elseif (isset($_GET['ensorceler']))
   }
 }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
-  <head>
-    <title>TP : Mini jeu de combat - Version 2</title>
-    
-    <meta http-equiv="Content-type" content="text/html; charset=iso-8859-1" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-  </head>
-  <body>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TP - PDO</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet"> 
+
+</head>
+<body class="body" >
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>
+                TP - PDO
+            </h2>
+        </div>
+    </div>
     <p>Nombre de personnages creer : <?php echo $manager->count(); ?></p>
 <?php
-if (isset($message)) // On a un message à afficher ?
+if (isset($message)) 
 {
-  echo '<p>', $message, '</p>'; // Si oui, on l'affiche
+  echo '<p>', $message, '</p>'; 
 }
 
-if (isset($perso)) // Si on utilise un personnage (nouveau ou pas).
+if (isset($perso)) 
 {
 ?>
     <p><a href="?deconnexion=1">Deconnexion</a></p>
     
     <fieldset>
-      <legend>Mes informations</legend>
-      <p>
+      <legend class="game">Mes informations</legend>
+      <p style="color:white;">
         Type : <?php echo ucfirst($perso->type()); ?><br />
         Nom : <?php echo htmlspecialchars($perso->nom()); ?><br />
         pv : <?php echo $perso->pv(); ?><br />
          bourse d or : <?php echo $perso->argent(); ?><br />
       
 <?php
-// On affiche l'atout du personnage suivant son type.
+
 switch ($perso->type())
 {
   case 'magicien' :
@@ -228,11 +241,11 @@ echo $perso->atout();
       </p>
     </fieldset>
     
-    <fieldset>
+    <fieldset style="color:white;">
       <legend>Qui attaquer ?</legend>
       <p>
 <?php
-// On récupère tous les personnages par ordre alphabétique, dont le nom est différent de celui de notre personnage (on va pas se frapper nous-même :p).
+
 $retourPersos = $manager->getList($perso->nom());
 
 if (empty($retourPersos))
@@ -253,7 +266,7 @@ else
     {
       echo '<a href="?frapper=', $unPerso->id(), '">', htmlspecialchars($unPerso->nom()), '</a> (pv : ', $unPerso->pv(), ' | type : ', $unPerso->type(),'| argent : ', $unPerso->argent(),')';
       
-      // On ajoute un lien pour lancer un sort si le personnage est un magicien.
+      
       if ($perso->type() == 'magicien')
       {
         echo ' | <a href="?ensorceler=', $unPerso->id(), '">Lancer un sort</a>';
@@ -288,7 +301,7 @@ else
   </body>
 </html>
 <?php
-if (isset($perso)) // Si on a créé un personnage, on le stocke dans une variable session afin d'économiser une requête SQL.
+if (isset($perso)) 
 {
   $_SESSION['perso'] = $perso;
 }

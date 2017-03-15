@@ -29,7 +29,7 @@ if (!empty($_POST['btnLogin'])) {
         if($user_id > 0)
         {
             $_SESSION['user_id'] = $user_id; // Set Session
-            header("Location: profile.php"); // Redirect user to the profile.php
+            echo "<script language='Javascript'>document.location='profile.php'</script>";
         }
         else
         {
@@ -58,7 +58,7 @@ if (!empty($_POST['btnRegister'])) {
         $user_id = $app->Register($_POST['name'], $_POST['email'], $_POST['username'], $_POST['password']);
         // set session and redirect user to the profile page
         $_SESSION['user_id'] = $user_id;
-        header("Location: profile.php");
+        echo "<script language='Javascript'>document.location='profile.php'</script>";
     }
 }
 ?>
